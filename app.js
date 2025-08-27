@@ -7,7 +7,6 @@ const API_URL = "https://api-server-a6k1.onrender.com/todolists";
 
 let todos = [];
 
-// Lấy tất cả todos
 async function fetchTodos() {
   try {
     const res = await fetch(API_URL);
@@ -18,7 +17,6 @@ async function fetchTodos() {
   }
 }
 
-// Render danh sách
 function renderTodos() {
   todoList.innerHTML = "";
   const now = new Date();
@@ -43,7 +41,6 @@ function renderTodos() {
       </div>
     `;
 
-    // Add event listeners cho nút
     li.querySelector(".done-btn").addEventListener("click", () => toggleDone(todo._id));
     li.querySelector(".delete-btn").addEventListener("click", () => deleteTodo(todo._id));
 
@@ -51,7 +48,6 @@ function renderTodos() {
   });
 }
 
-// Thêm todo
 async function addTodo() {
   const text = input.value.trim();
   const deadline = timeInput.value;
@@ -75,7 +71,6 @@ async function addTodo() {
   }
 }
 
-// Xóa todo
 async function deleteTodo(id) {
   try {
     await fetch(`${API_URL}/${id}`, { method: "DELETE" });
@@ -86,7 +81,6 @@ async function deleteTodo(id) {
   }
 }
 
-// Toggle done
 async function toggleDone(id) {
   const todo = todos.find(t => t._id === id);
   const updatedDone = !todo.done;
@@ -104,10 +98,8 @@ async function toggleDone(id) {
   }
 }
 
-// Sự kiện thêm todo
 addBtn.addEventListener("click", addTodo);
 input.addEventListener("keypress", e => { if (e.key === "Enter") addTodo(); });
 timeInput.addEventListener("keypress", e => { if (e.key === "Enter") addTodo(); });
 
-// Khởi tạo
 fetchTodos();
