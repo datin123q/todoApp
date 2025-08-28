@@ -20,7 +20,8 @@ async function fetchTodos() {
 function renderTodos() {
   todoList.innerHTML = "";
   const now = new Date();
-
+  todos.sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
+  console.log(todos);
   todos.forEach(todo => {
     const li = document.createElement("li");
     const deadline = new Date(todo.deadline);
